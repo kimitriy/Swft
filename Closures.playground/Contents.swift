@@ -60,6 +60,20 @@ grabLunch(search: {
 	print("Alfredo's Pizza: 2 miles away")
 })
 
+//another example
+func myFunc(param: String, closure: (Int) -> ()) {
+	closure(10)
+	print("in func body: \(param)")
+}
+
+myFunc(param: "wtf", closure: { num in
+	var rv = 11
+	rv += num
+	print("in closure: \(rv)")
+})
+
+print("out of closure")
+
 
 //TRAILING CLOSURES_________________________________________________________________
 //RULE: in trailing closure, if a function accepts a closure as its last parameter:
