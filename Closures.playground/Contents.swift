@@ -183,7 +183,7 @@ print("Now serving \(customerProvider())!") //here we call the closure itself
 print(customersInLine.count)
 */
 
-/* 
+/*
 func serve(customer customerProvider: () -> String) {
 	print("Now serving \(customerProvider())!")
 }
@@ -191,7 +191,7 @@ serve(customer: { customersInLine.remove(at: 0) } )
 print(customersInLine.count)
  */
 
-/* 
+/*
 func serve(customer customerProvider: @autoclosure () -> String) {
 	print("Now serving \(customerProvider())!")
 }
@@ -213,3 +213,4 @@ print("Collected \(customerProviders.count) closures.")
 for customerProvider in customerProviders {
 	print("Now serving \(customerProvider())!")
 }
+

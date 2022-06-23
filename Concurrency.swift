@@ -1,46 +1,47 @@
 import Foundation
 
-/* self.geocoder.geocodeAddressString(combinedAddress, completionHandler: {(placemarks, error) -> Void in
-	if let placemark = placemarks?[0] {
-		let placemark = placemarks![0]
-		self.placemarkLatitude = (placemark.location?.coordinate.latitude)!
-		self.placemarkLongitude = (placemark.location?.coordinate.longitude)!
-	}
-})
-let eventLatitude = self.placemarkLatitude // 0.0!
-let eventLongitude = self.placemarkLongitude // 0.0! */
 
-let num = 11
-var rv: Int = 0
 
-func myFunc(param: Int, completionHandler: (Int) -> Void) {
-	rv = param + num
-	print("in func body. rv: \(rv)")
+func myFunc(param: String, closure: (Int) -> ()) {
+	closure(10)
+	print("in func body: \(param)")
 }
 
-myFunc(param: 10, completionHandler: {num in 
-	rv = 10 * num
-	print("in closure. rv: \(rv)")
+myFunc(param: "wtf", closure: { num in
+	var rv = 11
+	rv += num
+	print("in closure: \(rv)")
 })
 
-let b = rv
+print("out of closure")
 
-print("out of closure. b: \(b)")
+// func add(a: Int, b: Int, _ action: (Int) -> Void) {
+// 	let sum = a + b
+// 	action(sum)
+// }
 
-// 1
-/* self.geocoder.geocodeAddressString(combinedAddress, completionHandler: {(placemarks, error) -> Void in
-	// 2, some time later
-	if let placemark = placemarks?[0] {
-		// 3
-		let placemark = placemarks![0]
-		// 4
-		self.placemarkLatitude = (placemark.location?.coordinate.latitude)!
-		// 5
-		self.placemarkLongitude = (placemark.location?.coordinate.longitude)!
-		// 6
-		let eventLatitude = self.placemarkLatitude
-		// 7
-		let eventLongitude = self.placemarkLongitude
-		// and so on...
-	}
-}) */
+// add(a: 10, b: 20, { res in
+// 	print(res)
+// })
+
+func add(a: Int, b: Int, _ action: (Int, Int) -> Int) {
+	print(action(a, b))
+}
+
+add(a: 10, b: 20, { num1, num2 in
+	return (num1 * num2)
+})
+
+func howAreYou(_ responseHandler: @escaping (String) -> Void) {
+	print("Hey, how are you?") // you ask how are you
+  
+	// It takes 2 seconds for your friend to answer:
+	DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+		responseHandler("Hi, I'm doing really good.")
+	})
+
+	print("Responding takes a while...")
+}
+howAreYou({ friendResponse in
+	print(friendResponse) // print the response that arrives later
+})
